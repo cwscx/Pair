@@ -9,5 +9,7 @@ Template.register.events({
 		var re_password=$(e.target).find('[name=re-password]').val();
 
 		Meteor.call("createNewUser", email_address, first_name, last_name, password, re_password);
+
+		Router.go("registerSuccess");
 	}
 });
