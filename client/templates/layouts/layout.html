@@ -1,0 +1,13 @@
+<template name="layout">
+	<div class = "container">
+		{{> topBar}}
+	</div>
+	<div class="container-fluid row">
+		<div class="col-md-2">
+			{{> sidebar}}
+		</div>
+		<div class="col-md-8">
+			{{> yield}}
+		</div>
+	</div>
+</template>
