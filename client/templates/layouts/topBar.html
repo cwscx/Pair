@@ -10,9 +10,14 @@
 					<li><a>All Pairs</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a style="color:#FF6633">{{errorMessage}}</a></li>
-					<li>{{> login}}</li>
-					<li><a href="{{pathFor 'register'}}">Sign up</a></li>
+					{{#if noUser}}
+						<li><a style="color:#FF6633">{{errorMessage}}</a></li>
+						<li>{{> login}}</li>
+						<li><a href="{{pathFor 'register'}}">Sign up</a></li>
+					{{else}}
+						<li><a href="{{pathFor 'dashboard'}}">{{username}}</a></li>
+						<li><a href='#' class='signout'>Sign out</a></li>
+					{{/if}}
 				</ul>
 			</div>
 		</div>

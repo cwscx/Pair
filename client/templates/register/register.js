@@ -7,12 +7,18 @@ Template.register.events({
 		var password=$(e.target).find('[name=password]').val();
 		var re_password=$(e.target).find('[name=re-password]').val();
 
+
 		Meteor.call("createNewUser", email_address, username, password, re_password, 
 			function(error, result) {
 				if(error){
-					alert(error);
-				}else
+					Session.set('RegErr', error.message);
+				}else{
 					Router.go("registerSuccess");
-				});
+				}
+			});
 	}
 });
+
+Template.register.helpers({
+	errMsg: function() {return Session.get('RegErr');},
+})

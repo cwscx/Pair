@@ -28,8 +28,8 @@ Template.login.events({
 				return false;
 			}
 			
-			Session.set('errorMessage', "Success");
-			Router.go('/');				
+			var username = Meteor.user().username;
+			Router.go('/dashboard/' + username);				
 		});
 
 		return false;
