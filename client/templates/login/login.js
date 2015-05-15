@@ -28,7 +28,7 @@ Template.login.events({
 				return false;
 			}
 			
-			Router.go('/dashboard/' + Meteor.user()._id);				
+			Router.go('/' + Meteor.user()._id + '/dashboard');				
 		});
 
 		return false;
