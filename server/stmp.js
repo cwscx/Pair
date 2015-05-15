@@ -30,7 +30,7 @@ if(Meteor.isServer)
 
     /* After a new User is created, this will always be called to send a verfication email */
 	Accounts.onCreateUser(function(options, user) {
-		user.profile = {};
+		user.profile = {'tagsNumber': 0,};
 
 		Meteor.setTimeout(function() {
 			Accounts.sendVerificationEmail(user._id);
