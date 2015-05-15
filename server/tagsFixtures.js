@@ -1,4 +1,4 @@
-if(Genders.find().count() == 0)
+if(Genders.find().count() === 0)
 {
 	Genders.insert({
 		discription: "Male"

@@ -27,8 +27,9 @@ Template.login.events({
 				Session.set('errorMessage', "Your email address is not verified.");
 				return false;
 			}
-			
-			Router.go('/' + Meteor.user()._id + '/dashboard');				
+			else {
+				Router.go('/' + Meteor.user()._id + '/dashboard');	
+			}			
 		});
 
 		return false;
