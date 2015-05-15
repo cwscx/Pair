@@ -28,8 +28,7 @@ Template.login.events({
 				return false;
 			}
 			
-			var username = Meteor.user().username;
-			Router.go('/dashboard/' + username);				
+			Router.go('/dashboard/' + Meteor.user()._id);				
 		});
 
 		return false;

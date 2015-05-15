@@ -1,18 +1,14 @@
-/*if(Sexes.find().count() == 0)
+if(Genders.find().count() == 0)
 {
-	Sexes.insert({
+	Genders.insert({
 		discription: "Male"
 	});
 
-	Sexes.insert({
+	Genders.insert({
 		discription: "Female"
-	})
-
-	Sexes.insert({
-		discription: "Unknown"
-	})
+	});
 }
-
+/*
 if(Heights.find().count() == 0)
 {
 	Heights.insert({

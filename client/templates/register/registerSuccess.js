@@ -5,8 +5,7 @@ Accounts.onEmailVerificationLink(function(token, done) {
 			alert(error);
 		}
 		else {
-			var username = Meteor.user().username;
-			Router.go('/dashboard/' + username);
+			Router.go('/dashboard/' + Meteor.user()._id);
 		}
 	});
 });
