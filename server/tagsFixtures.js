@@ -8,18 +8,33 @@ if(Genders.find().count() === 0)
 		discription: "Female"
 	});
 }
-/*
-if(Heights.find().count() == 0)
+
+
+if(Standings.find().count() === 0)
 {
-	Heights.insert({
-		discription: "Tall"
+	Standings.insert({
+		discription: "Freshman/Sophomore"
 	});
 
-	Heights.insert({
-		discription: "Medium"
-	})
+	Standings.insert({
+		discription: "Junior/Senior"
+	});
 
-	Heights.insert({
-		discription: "Lovely little"
-	})
-}*/
+	Standings.insert({
+		discription: "Master"
+	});	
+
+	Standings.insert({
+		discription: "Phd"
+	});	
+
+	Standings.insert({
+		discription: "Working"
+	});
+}
+
+if(Meteor.isServer)
+{
+	Meteor.publish('gender', function() {return Genders.find();})
+	Meteor.publish('standing', function() {return Standings.find();})
+}

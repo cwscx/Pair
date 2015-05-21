@@ -15,5 +15,11 @@ Template.topBar.events({
 				Router.go('/');
 			}
 		});
+	},
+
+	'click .profile': function() {
+		setInterval(function() {
+			Router.go('/' + Meteor.user()._id + '/dashboard');
+		}, 100);
 	}
 });

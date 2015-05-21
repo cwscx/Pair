@@ -1,3 +1,3 @@
 Template.newRegister.helpers({
-	introStart: function() {return Session.get('introFinished') === false;},
+	tagsStart: function() {return Session.get('introFinished') === true;},
 });
