@@ -16,6 +16,7 @@ Template.introduction.rendered = function() {
 				$('br').remove();
 				Session.set('introFinished', true);
 				Session.set('selectedTag', 'gender');
+				Session.set('selectError', '');
 			});
 		});
 	});

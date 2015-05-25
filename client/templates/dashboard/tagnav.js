@@ -1,22 +1,64 @@
 Template.tagnav.events({
 	'click #gender': function() {
 		Session.set('selectedTag', 'gender');
+		$('li').removeClass('tab-current');
+		$('#genderLi').addClass('tab-current');
 	},
 	'click #standing': function() {
-		Session.set('selectedTag', 'standing');
+		if(Meteor.user().profile.gender)
+		{
+			Session.set('selectedTag', 'standing');
+			Session.set('selectError', '');
+			$('li').removeClass('tab-current');
+			$('#standingLi').addClass('tab-current');
+		}
+		else
+		{
+			Session.set('selectError', 'Gender is not selected!');
+		}
 	},
 	'click #majors': function() {
-		Session.set('selectedTag', 'majors');
+		if(!Meteor.user().profile.gender)
+		{
+			Session.set('selectError', 'Gender is not selected!');
+		}
+		else if(!Meteor.user().profile.standing)
+		{
+			Session.set('selectError', 'Standing is not selected!');
+		}
+		else
+		{
+		    Session.set('selectedTag', 'majors');
+   			Session.set('selectError', '');
+   			$('li').removeClass('tab-current');
+			$('#majorsLi').addClass('tab-current');
+		}
 	},
 	'click #interests': function() {
-		Session.set('selectedTag', 'interests');
-	},
-	'click #others': function() {
-		Session.set('selectedTag', 'others');
+		if(!Meteor.user().profile.gender)
+		{
+			Session.set('selectError', 'Gender is not selected!');
+		}
+		else if(!Meteor.user().profile.standing)
+		{
+			Session.set('selectError', 'Standing is not selected!');
+		}
+		else if(!Meteor.user().profile.majors)
+		{
+			Session.set('selectError', 'Major is not selected!');
+		}
+		else
+		{
+			Session.set('selectedTag', 'interests');
+			Session.set('selectError', '');
+			$('li').removeClass('tab-current');
+			$('#interestsLi').addClass('tab-current');
+		}
 	},
 });
 
 Template.tagnav.helpers({
+	errorMessage: function() {return Session.get('selectError');},
 	genderSelected: function() {
 		if(Session.get('selectedTag') === 'gender')
 			return true;
@@ -37,12 +79,6 @@ Template.tagnav.helpers({
 	},
 	interestsSelected: function() {
 		if(Session.get('selectedTag') === 'interests')
-			return true;
-		else
-			return false;
-	},
-	othersSelected: function() {
-		if(Session.get('selectedTag') === 'others')
 			return true;
 		else
 			return false;

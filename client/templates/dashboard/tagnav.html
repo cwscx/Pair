@@ -2,20 +2,17 @@
 	<div class="tabs tabs-style-linemove">
 		<nav>
 			<ul>
-				<li class="tab-current" id="gender">
+				<li class="tab-current" id="genderLi">
 					<a class="glyphicon glyphicon-user" id="gender"><span> Gender</span></a>
 				</li>
-				<li id="standings">
+				<li id="standingLi">
 					<a class="glyphicon glyphicon-time" id="standing"><span> Standing</span></a>
 				</li>
-				<li id="majors">
+				<li id="majorsLi">
 					<a class="glyphicon glyphicon-education" id="majors"><span> Majors</span></a>
 				</li>
-				<li id="interests">
+				<li id="interestsLi">
 					<a class="glyphicon glyphicon-heart" id="interests"><span> Interests</span></a>
-				</li>
-				<li id="others">
-					<a class="glyphicon glyphicon-tag" id="others"><span> Others</span></a>
 				</li>
 			</ul>
 		</nav>
@@ -29,14 +26,13 @@
 					{{#if majorsSelected}}
 						{{> majorsSelection}}
 					{{else}}
-						{{#if interestsSelected}}
-							{{> interestsSelection}}
-						{{else}}
-							{{> othersSelection}}
-						{{/if}}
+						{{> interestsSelection}}
 					{{/if}}
 				{{/if}}
 			{{/if}}
-		</div>	
+		</div>
+	</div>
+	<div>
+		<h6><a style="color:#FF6633">{{errorMessage}}</a></h6>
 	</div>
 </template>

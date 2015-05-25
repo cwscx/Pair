@@ -2,22 +2,62 @@
 	{{#each gender}}
 		<input class="btn btn-default" name="gender" type="button" value="{{discription}}"/>
 	{{/each}}
+	<div>
+		<button type="button" id="next" class="btn-primary btn-lg active">next</button> 
+	</div>
 </template>
 
 <template name="standingSelection">
 	{{#each standing}}
 		<input class="btn btn-default" name="standing" type="button" value="{{discription}}"/>
 	{{/each}}
+	<div>
+		<button type="button" id="next" class="btn-primary btn-lg">next</button> 
+	</div>
 </template>
 
 <template name="majorsSelection">
-	<button>M</button>
+	{{#each engineeringMajor}}
+		<input class="btn btn-primary btn-lg active" name="engineering" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+	{{#each socialMajor}}
+		<input class="btn btn-default" name="social" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+	{{#each scienceMajor}}
+		<input class="btn btn-default" name="science" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+	{{#each medMajor}}
+		<input class="btn btn-default" name="medical" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+	{{#each busMajor}}
+		<input class="btn btn-default" name="business" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+		<h6>Your major is not listed here? Click the button here to name your major here!</h6>
+		<button id="self" class="btn-primary btn-lg active">Define your major</button>
+	<br/>
+	<div>
+		<button id="next" class="btn-primary btn-lg active">next</button> 
+	</div>
 </template>
 
 <template name="interestsSelection">
-	<button>M</button>
-</template>
-
-<template name="othersSelection">
-	<button>M</button>
+	{{#each sport}}
+		<input class="btn btn-default" name="medical" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+	{{#each casualty}}
+		<input class="btn btn-default" name="business" type="button" value="{{discription}}"/>
+	{{/each}}
+	<br/>
+		<h6>Your interests are not listed here? Click the button here to name your interests here!</h6>
+		<button id="self" class="btn-primary btn-lg active">Define your interests</button>
+	<br/>
+	<div>
+		<button id="done" class="btn-primary btn-lg active">Done</button> 
+	</div>
 </template>
