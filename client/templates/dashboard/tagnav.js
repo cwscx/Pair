@@ -55,6 +55,19 @@ Template.tagnav.events({
 			$('#interestsLi').addClass('tab-current');
 		}
 	},
+	'click #done': function() {
+		if(!Meteor.user().profile.interests)
+		{
+			Session.set('selectError', 'You should select at least one interest!');
+		}
+		else
+		{
+			Session.set('selectError', '');
+			$('.tabs').fadeOut(1200, function() {
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.firstTimeUser': false}});
+			});
+		}	
+	},
 });
 
 Template.tagnav.helpers({
@@ -84,3 +97,9 @@ Template.tagnav.helpers({
 			return false;
 	},
 });
+
+Template.tagnav.rendered = function() {
+	$(function() {
+		$('.tabs').hide().fadeIn(1400);
+	});
+};

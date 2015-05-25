@@ -185,8 +185,6 @@ Template.interestsSelection.events({
 	'click .btn': function() {
 		var count = Meteor.user().profile.tagsNumber;
 
-		console.log("xxxx");
-
 		var tagId = this._id;
 		var i = Interests.find(tagId).fetch()[0].discription;
 
@@ -220,16 +218,6 @@ Template.interestsSelection.events({
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.tagsNumber': count}});
 			Session.set('selectError', '');
 		}
-	},
-	'click #done': function() {
-		if(!Meteor.user().profile.interests)
-		{
-			Session.set('selectError', 'You should select at least one interest!');
-		}
-		else
-		{
-			Session.set('selectError', '');
-		}	
 	},
 	'click #self': function() {
 		bootbox.prompt({
