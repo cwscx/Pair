@@ -1,44 +1,42 @@
 <template name="tagnav">
-	<div class="container-fluid row">
-		<div class="tabs tabs-style-linemove">
-			<nav>
-				<ul>
-					<li class="tab-current" id="genderLi">
-						<a class="glyphicon glyphicon-user" id="gender"><span> Gender</span></a>
-					</li>
-					<li id="standingLi">
-						<a class="glyphicon glyphicon-time" id="standing"><span> Standing</span></a>
-					</li>
-					<li id="majorsLi">
-						<a class="glyphicon glyphicon-education" id="majors"><span> Majors</span></a>
-					</li>
-					<li id="interestsLi">
-						<a class="glyphicon glyphicon-heart" id="interests"><span> Interests</span></a>
-					</li>
-				</ul>
-			</nav>
-			<div class="content-wrap">
-				{{#if genderSelected}}
-					{{> genderSelection}}
-				{{else}}
-				 	{{#if standingSelected}}
-						{{> standingSelection}}
-					{{else}} 
-						{{#if majorsSelected}}
-							{{> majorsSelection}}
-						{{else}}
-							{{> interestsSelection}}
-							<hr/>
-							<div>
-								<button id="done" class="btn-primary btn-lg">Done!</button> 
-							</div>
-						{{/if}}
+	<div class="tabs tabs-style-linemove">
+		<nav>
+			<ul>
+				<li class="tab-current" id="genderLi">
+					<a class="glyphicon glyphicon-user" id="gender"><span> Gender</span></a>
+				</li>
+				<li id="standingLi">
+					<a class="glyphicon glyphicon-time" id="standing"><span> Standing</span></a>
+				</li>
+				<li id="majorsLi">
+					<a class="glyphicon glyphicon-education" id="majors"><span> Majors</span></a>
+				</li>
+				<li id="interestsLi">
+					<a class="glyphicon glyphicon-heart" id="interests"><span> Interests</span></a>
+				</li>
+			</ul>
+		</nav>
+		<div class="content-wrap">
+			{{#if genderSelected}}
+				{{> genderSelection}}
+			{{else}}
+			 	{{#if standingSelected}}
+					{{> standingSelection}}
+				{{else}} 
+					{{#if majorsSelected}}
+						{{> majorsSelection}}
+					{{else}}
+						{{> interestsSelection}}
+						<hr/>
+						<div>
+							<button id="done" class="btn-primary btn-lg">Done!</button> 
+						</div>
 					{{/if}}
 				{{/if}}
-			</div>
-			<div>
-				<h6><a style="color:#FF6633">{{errorMessage}}</a></h6>
-			</div>
+			{{/if}}
+		</div>
+		<div>
+			<h6><a style="color:#FF6633">{{errorMessage}}</a></h6>
 		</div>
 	</div>
 </template>

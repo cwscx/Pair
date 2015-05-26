@@ -7,4 +7,8 @@ Template.dashboard.helpers({
 		else 
 			return false;
 	},
-})
+});
+
+Template.dashboard.rendered = function() {
+	clearTimeOut(profileVar);
+}

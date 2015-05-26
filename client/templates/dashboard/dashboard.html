@@ -1,6 +1,7 @@
 <template name="dashboard">
 	{{#if newUser}}
 		{{> newRegister}}
+	{{else}}
+		{{> userProfile}}
 	{{/if}}
-	{{> userProfile}}
 </template>
