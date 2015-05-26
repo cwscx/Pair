@@ -128,6 +128,7 @@ Template.majorsSelection.events({
 		}	
 	},
 	'click #self': function() {
+		console.log("xxxxxx");
 		bootbox.prompt({
 			title: 'Write your major here!',
 			size: 'small',
