@@ -1,18 +1,18 @@
 <template name="userProfile">
 	<div class="panel panel-default" id="profile" style="text-align:center">
 		<div class="panel-heading">{{username}}'s Tags</div>
-		<div class="panel-body" style="font-size:36px">
-			<span class="label label-primary">{{genderTag}}</span>
-			<span class="label label-primary">{{standingTag}}</span>
+		<div class="panel-body" style="ui-widget-content; font-size:36px">
+			<div class="label label-primary">{{genderTag}}</div>
+			<div class="label label-primary">{{standingTag}}</div>
 			{{#each majorsTags}}
-				<span class="label label-primary">{{this}}</span>
+				<div class="label label-primary">{{this}}</div>
 			{{/each}}
 			{{#each interestsTags}}
-				<span class="label label-primary">{{this}}</span>
+				<div class="label label-primary">{{this}}</div>
 			{{/each}}
 		</div>
 		<div class="panel-footer">
-			<button type="button" id="modify" class="btn btn-primary btn-lg">Modify</button>
+			<button type="button" id="modify" class="btn btn-primary btn-lg">Modify Your Tags</button>
 		</div>
 	</div>
 </template>
