@@ -1,24 +1,29 @@
 <template name="genderSelection">
+	<br/>
 	{{#each gender}}
-		<input class="btn btn-default" name="gender" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="gender" type="button" value="{{discription}}"/>
 	{{/each}}
+	<hr/>
 	<div>
-		<button type="button" id="next" class="btn-primary btn-lg active">next</button> 
+		<button type="button" id="next" class="btn-primary btn-lg" text>next</button> 
 	</div>
 </template>
 
 <template name="standingSelection">
+	<br/>
 	{{#each standing}}
-		<input class="btn btn-default" name="standing" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="standing" type="button" value="{{discription}}"/>
 	{{/each}}
+	<hr/>
 	<div>
 		<button type="button" id="next" class="btn-primary btn-lg">next</button> 
 	</div>
 </template>
 
 <template name="majorsSelection">
+	<br/>
 	{{#each engineeringMajor}}
-		<input class="btn btn-primary btn-lg active" name="engineering" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary btn-lg" name="engineering" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 	{{#each socialMajor}}
@@ -38,14 +43,15 @@
 	{{/each}}
 	<br/>
 		<h6>Your major is not listed here? Click the button here to name your major here!</h6>
-		<button id="self" class="btn-primary btn-lg active">Define your major</button>
-	<br/>
+		<button id="self" class="btn-primary btn-lg">Define your major</button>
+	<hr/>
 	<div>
-		<button id="next" class="btn-primary btn-lg active">next</button> 
+		<button id="next" class="btn-primary btn-lg">next</button> 
 	</div>
 </template>
 
 <template name="interestsSelection">
+	<br/>
 	{{#each sport}}
 		<input class="btn btn-default" name="medical" type="button" value="{{discription}}"/>
 	{{/each}}
@@ -55,6 +61,6 @@
 	{{/each}}
 	<br/>
 		<h6>Your interests are not listed here? Click the button here to name your interests here!</h6>
-		<button id="self" class="btn-primary btn-lg active">Define your interests</button>
+		<button id="self" class="btn-primary btn-lg">Define your interests</button>
 	<br/>
 </template>
