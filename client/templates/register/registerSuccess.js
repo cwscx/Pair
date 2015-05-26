@@ -4,13 +4,5 @@ Accounts.onEmailVerificationLink(function(token, done) {
 		if(error) {
 			alert(error);
 		}
-		else {
-			if(Meteor.user())
-			{
-				setInterval(function() {
-					Router.go('/' + Meteor.user()._id + '/dashboard');
-				}, 100);
-			}
-		}
 	});
 });

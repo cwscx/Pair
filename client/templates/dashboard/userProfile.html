@@ -1,14 +1,14 @@
 <template name="userProfile">
 	<div class="panel panel-default" id="profile" style="text-align:center">
 		<div class="panel-heading">{{username}}'s Tags</div>
-		<div class="panel-body" style="ui-widget-content; font-size:36px">
-			<div class="label label-primary">{{genderTag}}</div>
-			<div class="label label-primary">{{standingTag}}</div>
+		<div class="panel-body" style="font-size:36px">
+			<div class="label label-primary" name="draggable">{{genderTag}}</div>
+			<div class="label label-primary" name="draggable">{{standingTag}}</div>
 			{{#each majorsTags}}
-				<div class="label label-primary">{{this}}</div>
+				<div class="label label-primary" name="draggable">{{this}}</div>
 			{{/each}}
 			{{#each interestsTags}}
-				<div class="label label-primary">{{this}}</div>
+				<div class="label label-primary" name="draggable">{{this}}</div>
 			{{/each}}
 		</div>
 		<div class="panel-footer">

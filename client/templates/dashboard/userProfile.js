@@ -1,9 +1,21 @@
 Template.userProfile.helpers({
 	username: function() {return Meteor.user().username;},
-	genderTag: function() {return Meteor.user().profile.gender;},
-	standingTag: function() {return Meteor.user().profile.standing;},
-	majorsTags: function() {return Meteor.user().profile.majors},
-	interestsTags: function() {return Meteor.user().profile.interests},
+	genderTag: function() {
+		var profile = Meteor.user().profile;
+		return profile.gender;
+	},
+	standingTag: function() {
+		var profile = Meteor.user().profile;
+		return profile.standing;
+	},
+	majorsTags: function() {
+		var profile = Meteor.user().profile;
+		return profile.majors;
+	},
+	interestsTags: function() {
+		var profile = Meteor.user().profile;
+		return profile.interests;
+	},
 });
 
 
@@ -13,12 +25,14 @@ Template.userProfile.events({
 		$('#profile').fadeOut(1200, function() {
 			Session.set('selectedTag', 'gender');
 			Session.set('selectError', '');
-			Router.go('/' + Meteor.user()._id + '/tagModification');
+			
+			var id = Meteor.user()._id;
+			Router.go('/' + id + '/tagModification');
 		});
 	},
 });
 
 Template.userProfile.rendered = function() {
 	$("#profile").hide().fadeIn(1200);
-	$(".label").draggable({revert: true});
+	$('.label').draggable({revert: true});
 };

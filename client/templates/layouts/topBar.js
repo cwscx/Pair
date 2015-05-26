@@ -26,3 +26,11 @@ Template.topBar.events({
 		}
 	}
 });
+
+Template.topBar.rendered = function() {
+	$('#droppable').droppable({
+		drop: function(event, ui) {
+			ui.draggable.remove();
+		}
+	})
+};
