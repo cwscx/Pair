@@ -7,8 +7,10 @@ Template.dashboard.helpers({
 		else 
 			return false;
 	},
+	noUser: function() {
+		if(Meteor.user() === null)
+			return true;
+		else
+			return false;
+	},
 });
-
-Template.dashboard.rendered = function() {
-	clearTimeOut(profileVar);
-}

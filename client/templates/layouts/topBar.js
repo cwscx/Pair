@@ -20,7 +20,7 @@ Template.topBar.events({
 	'click #profilePage': function() {
 		if(Meteor.user())
 		{
-			profileVar = setTimeout(function() {
+			setTimeout(function() {
 				Router.go('/' + Meteor.user()._id + '/dashboard');
 			}, 50);
 		}
