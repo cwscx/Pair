@@ -17,9 +17,12 @@ Template.topBar.events({
 		});
 	},
 
-	'click .profile': function() {
-		setInterval(function() {
-			Router.go('/' + Meteor.user()._id + '/dashboard');
-		}, 100);
+	'click #profilePage': function() {
+		if(Meteor.user())
+		{
+			setTimeout(function() {
+				Router.go('/' + Meteor.user()._id + '/dashboard');
+			}, 50);
+		}
 	}
 });

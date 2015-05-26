@@ -6,3 +6,7 @@ Template.sidebar.helpers({
 	majorsTags: function() {return Meteor.user().profile.majors},
 	interestsTags: function() {return Meteor.user().profile.interests},
 });
+
+Template.sidebar.rendered = function() {
+	$('.label').draggable({revert: true});
+}

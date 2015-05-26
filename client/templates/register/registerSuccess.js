@@ -5,7 +5,12 @@ Accounts.onEmailVerificationLink(function(token, done) {
 			alert(error);
 		}
 		else {
-			Router.go('/' + Meteor.user()._id + '/dashboard');
+			if(Meteor.user())
+			{
+				setInterval(function() {
+					Router.go('/' + Meteor.user()._id + '/dashboard');
+				}, 100);
+			}
 		}
 	});
 });

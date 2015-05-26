@@ -23,27 +23,27 @@
 <template name="majorsSelection">
 	<br/>
 	{{#each engineeringMajor}}
-		<input class="btn btn-primary btn-lg" name="engineering" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="engineering" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 	{{#each socialMajor}}
-		<input class="btn btn-default" name="social" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="social" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 	{{#each scienceMajor}}
-		<input class="btn btn-default" name="science" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="science" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 	{{#each medMajor}}
-		<input class="btn btn-default" name="medical" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="medical" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 	{{#each busMajor}}
-		<input class="btn btn-default" name="business" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="business" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 		<h6>Your major is not listed here? Click the button here to name your major here!</h6>
-		<button id="self" class="btn-primary btn-lg">Define your major</button>
+		<button id="self" class="btn btn-primary">Define your major</button>
 	<hr/>
 	<div>
 		<button id="next" class="btn-primary btn-lg">next</button> 
@@ -53,14 +53,14 @@
 <template name="interestsSelection">
 	<br/>
 	{{#each sport}}
-		<input class="btn btn-default" name="medical" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="medical" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 	{{#each casualty}}
-		<input class="btn btn-default" name="business" type="button" value="{{discription}}"/>
+		<input class="btn btn-primary" name="business" type="button" value="{{discription}}"/>
 	{{/each}}
 	<br/>
 		<h6>Your interests are not listed here? Click the button here to name your interests here!</h6>
-		<button id="self" class="btn-primary btn-lg">Define your interests</button>
+		<button id="self" class="btn-primary">Define your interests</button>
 	<br/>
 </template>
