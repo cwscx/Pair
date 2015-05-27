@@ -31,7 +31,10 @@ Template.topBar.rendered = function() {
 	$(document).ready(function() {
 		$( ".droppable" ).droppable({
   			activeClass: "ui-state-highlight",
-  			drop: function( event, ui ) {}
+  			drop: function( event, ui ) {
+  				var content = ui.draggable.html();
+  				Meteor.call("dropTags", content);
+  			},
 		});
 	});
 	$( ".droppable" ).on( "drop", function( event, ui ) {} );
