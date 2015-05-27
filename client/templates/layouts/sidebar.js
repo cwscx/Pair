@@ -20,5 +20,5 @@ Template.sidebar.helpers({
 });
 
 Template.sidebar.rendered = function() {
-	$('.label').draggable({'revert': true});
+	$('.draggable').draggable({'revert': 'invalid'});
 };

@@ -2,13 +2,13 @@
 	<div class="panel panel-default" id="profile" style="text-align:center">
 		<div class="panel-heading">{{username}}'s Tags</div>
 		<div class="panel-body" style="font-size:36px">
-			<div class="label label-primary" name="draggable">{{genderTag}}</div>
-			<div class="label label-primary" name="draggable">{{standingTag}}</div>
+			<div class="label label-primary draggable">{{genderTag}}</div>
+			<div class="label label-primary draggable"> {{standingTag}}</div>
 			{{#each majorsTags}}
-				<div class="label label-primary" name="draggable">{{this}}</div>
+				<div class="label label-primary draggable">{{this}}</div>
 			{{/each}}
 			{{#each interestsTags}}
-				<div class="label label-primary" name="draggable">{{this}}</div>
+				<div class="label label-primary draggable">{{this}}</div>
 			{{/each}}
 		</div>
 		<div class="panel-footer">

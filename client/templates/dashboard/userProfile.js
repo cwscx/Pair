@@ -34,5 +34,7 @@ Template.userProfile.events({
 
 Template.userProfile.rendered = function() {
 	$("#profile").hide().fadeIn(1200);
-	$('.label').draggable({revert: true});
+	$('.draggable').draggable({
+		revert: 'invalid',
+	});
 };

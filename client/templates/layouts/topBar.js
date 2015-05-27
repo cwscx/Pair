@@ -1,7 +1,7 @@
 Template.topBar.helpers({
 	errorMessage: function() {return Session.get('errorMessage')},
 	noUser: function() {return Meteor.users.find().count() === 0 || Meteor.user().emails[0].verified === false},
-	username: function() {return 'Hello, ' + Meteor.user().username},
+	username: function() {return ' Hello, ' + Meteor.user().username},
 })
 
 
@@ -24,13 +24,15 @@ Template.topBar.events({
 				Router.go('/' + Meteor.user()._id + '/dashboard');
 			}, 50);
 		}
-	}
+	},
 });
 
 Template.topBar.rendered = function() {
-	$('#droppable').droppable({
-		drop: function(event, ui) {
-			ui.draggable.remove();
-		}
-	})
+	$(document).ready(function() {
+		$( ".droppable" ).droppable({
+  			activeClass: "ui-state-highlight",
+  			drop: function( event, ui ) {}
+		});
+	});
+	$( ".droppable" ).on( "drop", function( event, ui ) {} );
 };

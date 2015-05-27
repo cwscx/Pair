@@ -11,7 +11,7 @@ Template.register.events({
 		Meteor.call("createNewUser", email_address, username, password, re_password, 
 			function(error, result) {
 				if(error){
-					Session.set('RegErr', error.message);
+					Session.set('RegErr', error.reason);
 				}else{
 					Router.go("registerSuccess");
 				}
