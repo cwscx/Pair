@@ -15,8 +15,8 @@
 						<li>{{> login}}</li>
 						<li><a href="{{pathFor 'register'}}">Sign up</a></li>
 					{{else}}
-						<li id="profilePage"><a href="#">{{username}}</a></li>
-						<li><a href='#' class='signout'>Sign out</a></li>
+						<li id="profilePage"><a href="#"><span class="glyphicon glyphicon-home"></span> {{username}}</a></li>
+						<li><a href='#' class='signout'><span class="glyphicon glyphicon-off"></span> Sign out</a></li>
 					{{/if}}
 				</ul>
 			</div>
