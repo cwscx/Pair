@@ -9,7 +9,7 @@ Accounts.onEmailVerificationLink(function(token, done) {
 			{
 				setTimeout(function() {
 					Router.go('/' + Meteor.user()._id + '/dashboard');
-				}, 50);
+				}, 200);
 			}
 		}
 	});

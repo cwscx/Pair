@@ -16,6 +16,9 @@ Template.userProfile.helpers({
 		var profile = Meteor.user().profile;
 		return profile.interests;
 	},
+	errMsg: function() {
+		return Session.get('dropError');
+	}
 });
 
 
@@ -35,6 +38,21 @@ Template.userProfile.events({
 Template.userProfile.rendered = function() {
 	$("#profile").hide().fadeIn(1200);
 	$('.draggable').draggable({
-		revert: 'invalid',
+		revert: true,
 	});
+	$('.droppable').droppable({
+		activeClass: "ui-state-highlight",
+		drop: function(event, ui) {
+			var content = ui.draggable.text();
+			Meteor.call("dropTags", content, function(err) {
+				if(err) {
+					Session.set('dropError', err.reason);
+				}
+				else{
+					Session.set('dropError', '');
+				}
+			})
+		},
+	});
+	$('.droppable').on("drop", function(event, ui) {});
 };

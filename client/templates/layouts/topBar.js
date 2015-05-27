@@ -20,22 +20,10 @@ Template.topBar.events({
 	'click #profilePage': function() {
 		if(Meteor.user())
 		{
+			Session.set('dropError', '');
 			setTimeout(function() {
 				Router.go('/' + Meteor.user()._id + '/dashboard');
 			}, 50);
 		}
 	},
 });
-
-Template.topBar.rendered = function() {
-	$(document).ready(function() {
-		$( ".droppable" ).droppable({
-  			activeClass: "ui-state-highlight",
-  			drop: function( event, ui ) {
-  				var content = ui.draggable.html();
-  				Meteor.call("dropTags", content);
-  			},
-		});
-	});
-	$( ".droppable" ).on( "drop", function( event, ui ) {} );
-};
