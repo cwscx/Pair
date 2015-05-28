@@ -4,14 +4,17 @@
 	<div class="panel panel-default" style="text-align:center">
 		<div class="panel-heading">{{username}}'s Tags <span class="glyphicon glyphicon-tags"></span></div>
 		<div class="panel-body" style="font-size:18px">
-			<div class="label label-primary draggable">{{genderTag}}</div>
-			<div class="label label-primary draggable">{{standingTag}}</div>
+			<div class="label label-primary draggable" style="z-index:1">{{genderTag}}</div>
+			<div class="label label-primary draggable" style="z-index:1">{{standingTag}}</div>
 			{{#each majorsTags}}
-				<div class="label label-primary draggable">{{this}}</div>
+				<div class="label label-primary draggable" style="z-index:1">{{this}}</div>
 			{{/each}}
 			{{#each interestsTags}}
-				<div class="label label-primary draggable">{{this}}</div>
+				<div class="label label-primary draggable" style="z-index:1">{{this}}</div>
 			{{/each}}
+		</div>
+		<div class="panel-footer">
+			<input type="button" id="newPost" class="btn btn-large btn-primary" value="Find your new Pair!"/>	
 		</div>
 	</div>
 	{{/if}}

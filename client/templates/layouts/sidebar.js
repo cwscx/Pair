@@ -22,3 +22,9 @@ Template.sidebar.helpers({
 Template.sidebar.rendered = function() {
 	$('.draggable').draggable({'revert': true});
 };
+
+Template.sidebar.events({
+	'click #newPost': function() {
+		
+	}
+});

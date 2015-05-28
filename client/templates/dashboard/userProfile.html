@@ -2,13 +2,13 @@
 	<div class="panel panel-default" id="profile" style="text-align:center">
 		<div class="panel-heading">{{username}}'s Tags <span class="glyphicon glyphicon-tags"></span></div>
 		<div class="panel-body" style="font-size:36px">
-			<div class="label label-primary draggable">{{genderTag}}</div>
-			<div class="label label-primary draggable">{{standingTag}}</div>
+			<div class="label label-primary draggable" style="z-index:1">{{genderTag}}</div>
+			<div class="label label-primary draggable" style="z-index:1">{{standingTag}}</div>
 			{{#each majorsTags}}
-				<div class="label label-primary draggable">{{this}}</div>
+				<div class="label label-primary draggable" style="z-index:1">{{this}}</div>
 			{{/each}}
 			{{#each interestsTags}}
-				<div class="label label-primary draggable">{{this}}</div>
+				<div class="label label-primary draggable" style="z-index:1">{{this}}</div>
 			{{/each}}
 		</div>
 		<div class="panel-footer">
@@ -22,5 +22,5 @@
 			</div>
 		</div>
 	</div>
-	{{errMsg}}
+	<p style="color:#FF6633">{{errMsg}}</p>
 </template>

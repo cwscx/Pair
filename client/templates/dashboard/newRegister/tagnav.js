@@ -66,6 +66,8 @@ Template.tagnav.events({
 			$('.tabs').fadeOut(1200, function() {
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.firstTimeUser': false}});
 			});
+
+			Router.go('/');
 		}	
 	},
 });

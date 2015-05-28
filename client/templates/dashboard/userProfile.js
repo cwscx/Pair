@@ -41,7 +41,7 @@ Template.userProfile.rendered = function() {
 		revert: true,
 	});
 	$('.droppable').droppable({
-		activeClass: "ui-state-highlight",
+		tolerance: 'touch',
 		drop: function(event, ui) {
 			var content = ui.draggable.text();
 			Meteor.call("dropTags", content, function(err) {
