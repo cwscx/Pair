@@ -13,11 +13,11 @@ if(Genders.find().count() === 0)
 if(Standings.find().count() === 0)
 {
 	Standings.insert({
-		discription: "Freshman/ Sophomore"
+		discription: "Freshman/Sophomore"
 	});
 
 	Standings.insert({
-		discription: "Junior/ Senior"
+		discription: "Junior/Senior"
 	});
 
 	Standings.insert({
@@ -58,7 +58,7 @@ if(Majors.find().count() === 0)
 
 	Majors.insert({
 		category: "Engineering",
-		discription: "Electrical & Computer Engineering"
+		discription: "Electrical Engineering"
 	});
 
 	Majors.insert({
