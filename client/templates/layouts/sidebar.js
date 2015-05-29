@@ -23,12 +23,15 @@ Template.sidebar.helpers({
 	targetTags: function() {
 		if(Meteor.user())
 			return Meteor.user().profile.post.targetTags;
+	},
+	errorMessage: function() {
+		return Session.get('postError');
 	}
 });
 
 Template.sidebar.events({
 	'click .matchTag': function(event) {
-		if(Meteor.user().profile.post)
+		if(Meteor.user().profile.post.targetTags)
 		{
 			var targetTags = Meteor.user().profile.post.targetTags;
 			var input = $(event.target).html();
@@ -46,6 +49,7 @@ Template.sidebar.events({
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
 		}
 		$('#search').val($(event.target).html());
+		$('#matches').hide();
 	},
 	'click #customize': function() {
 		if(Meteor.user().profile.post)
@@ -71,6 +75,11 @@ Template.sidebar.events({
 		$('#what').val('');
 		$('#matches').hide();
 		$('#customize').hide();
+
+		Session.set('postError', '');
+		Session.set('what', '');
+		Session.set('hh', -1);
+		Session.set('mm', -1);
 	},
 	'dblclick .doubleclick': function(event) {
 		var unwanted = $(event.target).html();
@@ -84,10 +93,56 @@ Template.sidebar.events({
 		var input = $('#what').val();
 		Session.set('what', input);
 	},
-	'click #save': function() {
-		var input = Session.get('what');
-		Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.what': input}});
+	'change #hh': function() {
+		var input = $('#hh').val();
+		if(isNaN(input) === true)
+			Session.set('postError', 'Please enter a valid hour number!');
+		else
+		{
+			if(input >= 12)
+				Session.set('postError', 'Please enter a valid time period less than 12 hrs!');
+			else
+			{
+				Session.set('hh', input);
+				Session.set('postError', '');
+			}
+		}
 	},
+	'change #mm': function() {
+		var input = $('#mm').val();
+		if(isNaN(input) === true)
+			Session.set('postError', 'Please enter a valid minute number!');
+		else
+		{
+			if(input >= 60)
+				Session.set('postError', 'Please enter a valid time period for minutes!');
+			else
+			{
+				Session.set('mm', input);
+				Session.set('postError', '');
+			}
+		}
+	},
+	'click #save': function() {
+			Session.set('postError', '');
+
+			var what = Session.get('what');
+			var hh = Session.get('hh');
+			var mm = Session.get('mm');
+
+			var d = new Date();
+			d.setMinutes(Number(d.getMinutes()) + Number(mm));
+			d.setHours(Number(d.getHours()) + Number(hh));
+			
+			if(what !== '')
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.what': what}});
+
+			if(mm !== -1 && hh !== -1)
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': d}});
+			else
+				Session.set('postError', 'Please fill in both hour and minutes!');
+	},
+
 });
 
 Template.sidebar.rendered = function() {

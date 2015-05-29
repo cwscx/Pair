@@ -33,12 +33,8 @@
 	    	  	<div class="modal-body">
 	        		<form class="form-horizontal">
 						<div class="form-group">
-							<div class="col-md-3" style="text-align:left">
-							{{#each targetTags}}
-								<div class="label label-primary draggable doubleclick" style="z-index:1">{{this}}</div>
-							{{/each}}
-							</div>
-							<label for="search" class="col-md-2 control-label">Aim Tags!</label>
+							
+							<label for="search" class="col-md-3 control-label">Aim Tags!</label>
 							<div class="col-md-4 dropdown">
 								<input id="search" type="text" placeholder="tags" class="form-control input-md dropdown-toggle" autocomplete="off" data-toggle="dropdown" aria-expanded="false" />
 								<div class="col-md-4 test">
@@ -51,14 +47,36 @@
 									</ul>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary" id="customize" style="display:none">Add</button>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-primary" id="customize" stylpe="display:hidden">Add</button>
+							</div>
+							<div class="col-md-3" style="text-align:center">
+							{{#each targetTags}}
+								<div class="label label-primary draggable doubleclick" style="z-index:1">{{this}}</div>
+							{{/each}}
+							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-5">What</label>
+							<label class="control-label col-md-3">What</label>
 							<div class="col-md-6">
 								<input type="text" id="what" class="form-control input-md" placeholder="What to do?" autocomplete="off"/>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">After</label>
+							<div class="col-md-2">
+								<input type="text" id="hh" class="form-control input-md" placeholder="hh" autocomplete="off"/>
+							</div>
+							<label class="control-label col-md-1">hrs</label>
+							<div class="col-md-2">
+								<input type="text" id="mm" class="form-control input-md" placeholder="mm" autocomplete="off"/>
+							</div>
+							<label class="control-label col-md-1">mins</label>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Where</label>
+						</div>
+	      				<h6 style="color:#FF6633; text-align:center">{{errorMessage}}</h6>
 					</form>
 	      		</div>
 	      		<div class="modal-footer">
