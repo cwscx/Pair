@@ -36,10 +36,29 @@ Template.sidebar.events({
 			var targetTags = [];
 			targetTags.push($(event.target).html());
 
-			console.log(targetTags);
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
 		}
+		$('#search').val($(event.target).html());
 	},
+	'click #customize': function() {
+		if(Meteor.user().profile.post)
+		{
+			var targetTags = Meteor.user().profile.post.targetTags;
+			var input = $('#search').val();
+			if(targetTags.indexOf(input) === -1)
+			{
+				targetTags.push(input);
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+			}
+			else
+			{
+				var targetTags = [];
+				targetTags.push(input);
+
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+			}
+		}
+	}
 });
 
 Template.sidebar.rendered = function() {
@@ -50,6 +69,7 @@ Template.sidebar.rendered = function() {
 		{
 			$('#list_'.concat(i)).empty();
 		}
+		$('#customize').hide();
 
 		var input = $('#search').val();  // User input
 		var matches = [];                // Possible matches
@@ -107,7 +127,10 @@ Template.sidebar.rendered = function() {
 				}
 				/* If the matches have nothing, hide the dropbox */
 				else
-					$('#matches').hide();	
+				{
+					$('#matches').hide();
+					$('#customize').show();
+				}
 			}
 			else
 				$('#matches').hide();
