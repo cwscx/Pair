@@ -23,7 +23,10 @@ Template.sidebar.rendered = function() {
 	$('.draggable').draggable({'revert': true});
 	$('#search').on("keyup change", function() {
 		/* Clear the possible matched list first */
-		$("#list").empty();
+		for(var i = 0; i < 5; i++)
+		{
+			$('#list_'.concat(i)).empty();
+		}
 
 		var input = $('#search').val();  // User input
 		var matches = [];                // Possible matches
@@ -60,8 +63,10 @@ Template.sidebar.rendered = function() {
 	              	matches.push((interests.fetch())[i].discription);
 	      	}
 
+            /* If the matches has value, we need to print it out */
 	      	if(matches !== null)
 	      	{
+	      		/* Print at most 5 elements */
 				if(matches.length > 0)
 				{
 					var to_print;
@@ -72,17 +77,19 @@ Template.sidebar.rendered = function() {
 
 					for(var i = 0; i < to_print; i++)
 					{
-						$("#list").append("<a>" + matches[i] + "</a>")
+						$('#list_'.concat(i)).append("<a>" + matches[i] + "</a>")
 					}
 
 					$('#matches').show();
 				}
+				/* If the matches have nothing, hide the dropbox */
 				else
 					$('#matches').hide();	
 			}
 			else
 				$('#matches').hide();
 	    }
+	    /* If nothing is entered, hide the dropbox */
 	    else
 	    	$('#matches').hide();
 	});
