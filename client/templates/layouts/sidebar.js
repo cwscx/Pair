@@ -58,6 +58,11 @@ Template.sidebar.events({
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
 			}
 		}
+	},
+	'click #writePost': function() {
+		$('#search').val('');
+		$('#matches').hide();
+		$('#customize').hide();
 	}
 });
 
