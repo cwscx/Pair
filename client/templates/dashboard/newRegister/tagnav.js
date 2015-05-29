@@ -63,11 +63,10 @@ Template.tagnav.events({
 		else
 		{
 			Session.set('selectError', '');
-			$('.tabs').fadeOut(1200, function() {
+			$('.tabs').fadeOut(800, function() {
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.firstTimeUser': false}});
+				Router.go('/');
 			});
-
-			Router.go('/');
 		}	
 	},
 });
@@ -102,6 +101,6 @@ Template.tagnav.helpers({
 
 Template.tagnav.rendered = function() {
 	$(function() {
-		$('.tabs').hide().fadeIn(1400);
+		$('.tabs').hide().fadeIn(800);
 	});
 };

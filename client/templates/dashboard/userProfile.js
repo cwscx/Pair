@@ -25,7 +25,7 @@ Template.userProfile.helpers({
 
 Template.userProfile.events({
 	'click #modify': function() {
-		$('#profile').fadeOut(1200, function() {
+		$('#profile').fadeOut(800, function() {
 			Session.set('selectedTag', 'gender');
 			Session.set('selectError', '');
 			
@@ -36,7 +36,7 @@ Template.userProfile.events({
 });
 
 Template.userProfile.rendered = function() {
-	$("#profile").hide().fadeIn(1200);
+	$("#profile").hide().fadeIn(800);
 	$('.draggable').draggable({
 		revert: true,
 	});
