@@ -19,6 +19,29 @@ Template.sidebar.helpers({
 	},
 });
 
+Template.sidebar.events({
+	'click .matchTag': function(event) {
+		if(Meteor.user().profile.post)
+		{
+			var targetTags = Meteor.user().profile.post.targetTags;
+			var input = $(event.target).html();
+			if(targetTags.indexOf(input) === -1)
+			{
+				targetTags.push(input);
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+			}
+		}
+		else
+		{
+			var targetTags = [];
+			targetTags.push($(event.target).html());
+
+			console.log(targetTags);
+			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+		}
+	},
+});
+
 Template.sidebar.rendered = function() {
 	$('.draggable').draggable({'revert': true});
 	$('#search').on("keyup change", function() {
