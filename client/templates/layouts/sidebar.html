@@ -14,8 +14,40 @@
 			{{/each}}
 		</div>
 		<div class="panel-footer">
-			<input type="button" id="newPost" class="btn btn-large btn-primary" value="Find your new Pair!"/>	
+			<button class="btn btn-primary" data-toggle="modal" data-target="#writePost">Find your new Pair!</button>	
 		</div>
 	</div>
 	{{/if}}
+
+
+	<div class="modal fade" id="writePost">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       		 		<h4 class="modal-title">Modal title</h4>
+	    	  	</div>
+	    	  	<div class="modal-body">
+	        		<form class="form-horizontal">
+						<div class="form-group">
+							<label for="search" class="col-md-4 control-label">Aim Tags!</label>
+							<div class="col-md-5">
+								<input id="search" type="text" placeholder="tags" class="form-control input-md" autocomplete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="col-md-4">
+									<ul class="dropdown-menu" id="matches" role="listbox" style="display:none">
+										<li id="list"></li>
+									</ul>
+								</div>
+								<!--<span class="help-block">Find people with tags!</span>-->
+							</div>
+						</div>
+					</form>
+	      		</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        		<button type="button" class="btn btn-primary">Save changes</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
 </template>

@@ -31,3 +31,11 @@ a {
 a:hover, a:focus {
 	color: #74777b;
 }
+
+#grey
+{
+    color: #CCC;
+    background-color: transparent;
+    top: 0px;
+    position:absolute;
+}
