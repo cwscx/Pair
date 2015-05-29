@@ -13,9 +13,12 @@
 				<div class="label label-primary draggable" style="z-index:1">{{this}}</div>
 			{{/each}}
 		</div>
-		<div class="panel-footer">
-			<button class="btn btn-primary" data-toggle="modal" data-target="#writePost">Find your new Pair!</button>	
-		</div>
+		{{#if firstTimeUser}}
+		{{else}}
+			<div class="panel-footer">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#writePost" id="postButton">Find your Pair!</button>	
+			</div>
+		{{/if}}
 	</div>
 	{{/if}}
 
@@ -30,6 +33,11 @@
 	    	  	<div class="modal-body">
 	        		<form class="form-horizontal">
 						<div class="form-group">
+							<div class="col-md-1" style="text-align:center">
+							{{#each targetTags}}
+								<div class="label label-primary draggable doubleclick" style="z-index:1">{{this}}</div>
+							{{/each}}
+							</div>
 							<label for="search" class="col-md-4 control-label">Aim Tags!</label>
 							<div class="col-md-5">
 								<input id="search" type="text" placeholder="tags" class="form-control input-md" autocomplete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

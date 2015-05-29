@@ -17,6 +17,13 @@ Template.sidebar.helpers({
 		var profile = Meteor.user().profile;
 		return profile.interests;
 	},
+	firstTimeUser: function() {
+		return Meteor.user().profile.firstTimeUser === true;
+	},
+	targetTags: function() {
+		if(Meteor.user())
+			return Meteor.user().profile.post.targetTags;
+	}
 });
 
 Template.sidebar.events({
@@ -39,6 +46,7 @@ Template.sidebar.events({
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
 		}
 		$('#search').val($(event.target).html());
+		console.log($(event.target).html());
 	},
 	'click #customize': function() {
 		if(Meteor.user().profile.post)
@@ -59,11 +67,19 @@ Template.sidebar.events({
 			}
 		}
 	},
-	'click #writePost': function() {
+	'click #postButton': function() {
 		$('#search').val('');
 		$('#matches').hide();
 		$('#customize').hide();
-	}
+	},
+	'dblclick .doubleclick': function(event) {
+		var unwanted = $(event.target).html();
+		var targetTags = Meteor.user().profile.post.targetTags;
+		var index = targetTags.indexOf(unwanted);
+
+		targetTags.splice(index, 1);
+		Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+	},
 });
 
 Template.sidebar.rendered = function() {
@@ -144,4 +160,5 @@ Template.sidebar.rendered = function() {
 	    else
 	    	$('#matches').hide();
 	});
+	$('#')
 };
