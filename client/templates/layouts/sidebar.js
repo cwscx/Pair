@@ -68,6 +68,7 @@ Template.sidebar.events({
 	},
 	'click #postButton': function() {
 		$('#search').val('');
+		$('#what').val('');
 		$('#matches').hide();
 		$('#customize').hide();
 	},
@@ -78,6 +79,14 @@ Template.sidebar.events({
 
 		targetTags.splice(index, 1);
 		Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+	},
+	'change #what': function() {
+		var input = $('#what').val();
+		Session.set('what', input);
+	},
+	'click #save': function() {
+		var input = Session.get('what');
+		Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.what': input}});
 	},
 });
 
