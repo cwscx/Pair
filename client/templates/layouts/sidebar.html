@@ -28,21 +28,21 @@
 	    	<div class="modal-content">
 	      		<div class="modal-header">
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       		 		<h4 class="modal-title">Modal title</h4>
+       		 		<h4 class="modal-title">Write your post!</h4>
 	    	  	</div>
 	    	  	<div class="modal-body">
 	        		<form class="form-horizontal">
 						<div class="form-group">
-							<div class="col-md-1" style="text-align:center">
+							<div class="col-md-3" style="text-align:left">
 							{{#each targetTags}}
 								<div class="label label-primary draggable doubleclick" style="z-index:1">{{this}}</div>
 							{{/each}}
 							</div>
-							<label for="search" class="col-md-4 control-label">Aim Tags!</label>
-							<div class="col-md-5">
-								<input id="search" type="text" placeholder="tags" class="form-control input-md" autocomplete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<div class="col-md-5">
-									<ul class="dropdown-menu" id="matches" role="listbox" style="display:none">
+							<label for="search" class="col-md-2 control-label">Aim Tags!</label>
+							<div class="col-md-4 dropdown">
+								<input id="search" type="text" placeholder="tags" class="form-control input-md dropdown-toggle" autocomplete="off" data-toggle="dropdown" aria-expanded="false" />
+								<div class="col-md-4 test">
+									<ul class="dropdown-menu" role="menu" id="matches" aria-labelledby="search" style="display:none">
 										<li id="list_0" class="matchTag"></li>
 										<li id="list_1" class="matchTag"></li>
 										<li id="list_2" class="matchTag"></li>

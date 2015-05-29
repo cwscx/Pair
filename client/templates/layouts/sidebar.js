@@ -46,7 +46,6 @@ Template.sidebar.events({
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
 		}
 		$('#search').val($(event.target).html());
-		console.log($(event.target).html());
 	},
 	'click #customize': function() {
 		if(Meteor.user().profile.post)
@@ -144,7 +143,12 @@ Template.sidebar.rendered = function() {
 						$('#list_'.concat(i)).append("<a>" + matches[i] + "</a>")
 					}
 
+					/* Stupid away to avoid double click bug */
 					$('#matches').show();
+					$('#search').blur();
+					$('#matches').focus();
+					$('#matches').blur();
+					$('#search').focus();
 				}
 				/* If the matches have nothing, hide the dropbox */
 				else
@@ -160,5 +164,4 @@ Template.sidebar.rendered = function() {
 	    else
 	    	$('#matches').hide();
 	});
-	$('#')
 };
