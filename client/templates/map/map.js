@@ -79,5 +79,7 @@ function createMarker(place) {
 
     google.maps.event.addListener(marker, 'dblclick', function() {
       Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.location': marker.position}});
+      Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.locationName': place.name}});
+      $('#where').val(place.name);
     })
 }
