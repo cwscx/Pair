@@ -21,12 +21,12 @@ Template.sidebar.helpers({
 		return Meteor.user().profile.firstTimeUser === true;
 	},
 	targetTags: function() {
-		if(Meteor.user())
+		if(Meteor.user() && Meteor.user().profile.post)
 			return Meteor.user().profile.post.targetTags;
 	},
 	errorMessage: function() {
 		return Session.get('postError');
-	}
+	},
 });
 
 Template.sidebar.events({
@@ -139,10 +139,14 @@ Template.sidebar.events({
 
 			if(mm !== -1 && hh !== -1)
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': d}});
-			else
+			else if(!(mm === -1 && hh === -1))
 				Session.set('postError', 'Please fill in both hour and minutes!');
 	},
-
+	'click #postButton': function() {
+		setTimeout(function() {
+			google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
+		},500);
+	},
 });
 
 Template.sidebar.rendered = function() {
