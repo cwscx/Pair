@@ -31,7 +31,7 @@ Template.sidebar.helpers({
 
 Template.sidebar.events({
 	'click .matchTag': function(event) {
-		if(Meteor.user().profile.post.targetTags)
+		if(Meteor.user().profile.post && Meteor.user().profile.post.targetTags)
 		{
 			var targetTags = Meteor.user().profile.post.targetTags;
 			var input = $(event.target).html();
@@ -72,7 +72,20 @@ Template.sidebar.events({
 	},
 	'click #postButton': function() {
 		$('#search').val('');
-		$('#what').val('');
+
+		if(Meteor.user().profile.post)
+		{
+			if(!Meteor.user().profile.post.what)	
+				$('#what').val('');
+
+			if(!Meteor.user().profile.post.appointment)
+			{
+				$('#mm').val('');
+				$('#hh').val('');
+			}
+
+		}
+
 		$('#matches').hide();
 		$('#customize').hide();
 
@@ -80,6 +93,10 @@ Template.sidebar.events({
 		Session.set('what', '');
 		Session.set('hh', -1);
 		Session.set('mm', -1);
+
+		setTimeout(function() {
+			google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
+		},200);
 	},
 	'dblclick .doubleclick': function(event) {
 		var unwanted = $(event.target).html();
@@ -141,11 +158,6 @@ Template.sidebar.events({
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': d}});
 			else if(!(mm === -1 && hh === -1))
 				Session.set('postError', 'Please fill in both hour and minutes!');
-	},
-	'click #postButton': function() {
-		setTimeout(function() {
-			google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
-		},500);
 	},
 });
 
