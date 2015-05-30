@@ -4,13 +4,18 @@ if (Meteor.isClient) {
     });
 }
 
+Template.map.events({
+  'change #where':function() {
+    var keyword = $('#where').val();
+    Session.set('keyword', keyword);
+  },
+})
 Template.map.helpers({
     mapOptions: function() {
       // Make sure the maps API has loaded
       if (GoogleMaps.loaded()) {
-        setTimeout(function() {
-          google.maps.event.addDomListener(window, 'load', initialize);
-        });
+        var input = document.getElementById('where');
+        google.maps.event.addDomListener(input, 'change', initialize);
         // Map initialization options
         return {
           center: new google.maps.LatLng(32.881, -117.238),
@@ -21,18 +26,29 @@ Template.map.helpers({
     }
 });
 
-function initialize() {
-    map = GoogleMaps.maps.exampleMap.instance;
-    var ucsd = map.center;
-    var request = {
-      location: ucsd,
-      radius: 500,
-      types: ['store']
-    };
+var markers = [];
 
-    infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, callback);
+function initialize() {
+    setTimeout(function () {
+      for(var i = 0; i < markers.length; i++)
+      {
+        markers[i].setMap(null);
+      }
+
+      map = GoogleMaps.maps.exampleMap.instance;
+      var ucsd = map.center;
+      var key = Session.get('keyword');
+      console.log(key);
+      var request = {
+        location: ucsd,
+        radius: 2500,
+        keyword: key,
+      };
+
+      infowindow = new google.maps.InfoWindow();
+      var service = new google.maps.places.PlacesService(map);
+      service.nearbySearch(request, callback);
+    }, 200);
 }
 
 function callback(results, status) {
@@ -53,9 +69,10 @@ function createMarker(place) {
       id: document._id
     });
     marker.setMap(map);
+    markers.push(marker);
 
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(place.name);
       infowindow.open(map, this);
     })
-  }
+}

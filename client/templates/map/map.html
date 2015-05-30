@@ -1,5 +1,9 @@
-<template name="map">  
-  <div class="map-container">
-    {{> googleMap name="exampleMap" options=mapOptions}}
-  </div>
+<template name="map"> 
+	<label class="control-label col-md-3">Where</label>
+	<div class="col-md-6">
+		<input type="text" id="where" class="form-control input-md" placeholder="Where to go?" />
+	</div>
+  	<div class="map-container">
+    	{{> googleMap name="exampleMap" options=mapOptions}}
+  	</div>
 </template>
