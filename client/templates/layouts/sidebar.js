@@ -83,7 +83,6 @@ Template.sidebar.events({
 				$('#mm').val('');
 				$('#hh').val('');
 			}
-
 		}
 
 		$('#matches').hide();
@@ -93,6 +92,7 @@ Template.sidebar.events({
 		Session.set('what', '');
 		Session.set('hh', -1);
 		Session.set('mm', -1);
+		Session.set('newModal', true);
 
 		setTimeout(function() {
 			google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');

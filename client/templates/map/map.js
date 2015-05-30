@@ -9,7 +9,8 @@ Template.map.events({
     var keyword = $('#where').val();
     Session.set('keyword', keyword);
   },
-})
+});
+
 Template.map.helpers({
     mapOptions: function() {
       // Make sure the maps API has loaded
@@ -74,5 +75,9 @@ function createMarker(place) {
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(place.name);
       infowindow.open(map, this);
+    })
+
+    google.maps.event.addListener(marker, 'dblclick', function() {
+      Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.location': marker.position}});
     })
 }
