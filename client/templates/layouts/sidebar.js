@@ -209,7 +209,7 @@ Template.sidebar.events({
 				Session.set('locationName', Meteor.user().profile.post.locationName);
 			else
 				Session.set('locationName', null);
-
+		
 			setTimeout(function() {
 				google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
 			},400);
@@ -284,6 +284,8 @@ Template.sidebar.events({
 			
 			if(targetTags !== undefined)
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+			else
+				Meteor.users.update(Meteor.user()._id, {$unset: {'profile.post.targetTags': 1}});
 			
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.what': what}});
 
@@ -314,6 +316,7 @@ Template.sidebar.events({
 							});
 
 							Meteor.users.update(Meteor.user()._id, {$set: {'profile.havepost': Posts.findOne({posterId: Meteor.user()._id})}});
+							Session.keys = {};
 							Router.go('/');
 						}
 						else

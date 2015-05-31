@@ -4,7 +4,7 @@ if(Posts.find().count() === 0)
 	{
 		var user = Meteor.users.find().fetch()[i];
 
-		if(user.profile.havepost === true)
+		if(user.profile.havepost)
 		{
 			Posts.insert({
 				posterId: user._id,

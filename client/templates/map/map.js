@@ -34,6 +34,9 @@ Template.map.helpers({
         };
       }
     },
+    place: function() {
+      return Session.get('locationName');
+    }
 });
 
 var markers = [];

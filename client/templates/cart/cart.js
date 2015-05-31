@@ -74,6 +74,11 @@ Template.cart.events({
 			$("#cartList").attr('name', "showList");
 		}
 	},
+	'click #closeButton': function() {
+		$("#cartList").slideUp('slow');
+		$("#cartList").attr('name', "hideList");
+		Meteor.call('deletePost', Meteor.user()._id, Meteor.user().profile.havepost._id);
+	}
 });
 
 Template.cart.rendered = function() {
@@ -81,3 +86,5 @@ Template.cart.rendered = function() {
 		$('#cartList').hide().delay(500).slideDown('slow');
 	});
 }
+
+Meteor.subscribe('posts');
