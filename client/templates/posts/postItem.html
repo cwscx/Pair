@@ -1,13 +1,20 @@
 <template name="postItem">
 	<div class="container-fuild">
-		<div class="post panel panel-primary row-fuild">
-			<!--<div class="panel-heading user-tags">
-				{{#each user-tags}}
-					{{> user-tag}}
+		<div class="post panel panel-info row-fuild">
+			<div class="panel-heading col-md-12">
+				<h5>{{username}}</h5>
+				{{#each userTags}}
+					<div class="label label-primary">{{this}}</div>
 				{{/each}}
-			</div>-->
+			</div>
 			<div class="post-content panel-body">
-				<p>{{discription}}</p>
+				<h5> I want to <div class="label label-primary">{{what}}</div>
+				    with the ONE who is
+					{{#each targetTags}}
+						<div class="label label-primary">{{this}}</div>
+					{{/each}}
+					,after <div class="label label-primary">{{hr}}</div> hours and <div class="label label-primary">{{min}}</div> mintues at <div class="label label-primary">{{where}}</div>.
+				</h5>
 			</div>
 			<div class="panel-footer">
 				<input type="button" class="btn btn-primary" value="PAIR"/>

@@ -166,7 +166,7 @@ Template.sidebar.events({
 
 			setTimeout(function() {
 				google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
-			},200);
+			},400);
 		}
 	},
 	'dblclick .doubleclick': function(event) {
@@ -263,6 +263,11 @@ Template.sidebar.events({
 						{
 							$('.modal').modal('hide');
 							Meteor.users.update(Meteor.user()._id, {$set: {'profile.havepost': true}});
+							Posts.insert({
+								userId: Meteor.user()._id,
+							});
+
+							Router.go('/');
 						}
 						else
 							Session.set('postError', "Please finish where part of the post!");

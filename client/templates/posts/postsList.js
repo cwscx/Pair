@@ -3,3 +3,5 @@ Template.postsList.helpers({
 		return Posts.find();
 	}
 });
+
+Meteor.subscribe('posts');
