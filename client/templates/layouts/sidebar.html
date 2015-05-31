@@ -16,7 +16,11 @@
 		{{#if firstTimeUser}}
 		{{else}}
 			<div class="panel-footer">
+			{{#if havePost}}
+				{{> cart}}
+			{{else}}
 				<button class="btn btn-primary" data-toggle="modal" id="postButton">Find your Pair!</button>	
+			{{/if}}
 			</div>
 		{{/if}}
 	</div>

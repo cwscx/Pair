@@ -176,5 +176,5 @@ if(Meteor.isServer)
 	Meteor.publish('standing', function() {return Standings.find();});
 	Meteor.publish('major', function() {return Majors.find();});
 	Meteor.publish('interests', function() {return Interests.find();});
-	Meteor.publish('postUsers', function() {return Meteor.users.find({'profile.havepost': true});});
+	Meteor.publish('postUsers', function() {return Meteor.users.find();});
 }

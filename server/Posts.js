@@ -7,7 +7,7 @@ if(Posts.find().count() === 0)
 		if(user.profile.havepost === true)
 		{
 			Posts.insert({
-				userId: user._id,
+				posterId: user._id,
 			});
 		}
 	}

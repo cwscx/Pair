@@ -1,11 +1,11 @@
 Template.postItem.helpers({
 	username: function() {
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		return user.username;
 	},
 	userTags: function() {
 		var tags = [];
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		
 		tags.push(user.profile.gender);
 		tags.push(user.profile.standing);
@@ -22,16 +22,16 @@ Template.postItem.helpers({
 		return tags;
 	},
 	what: function() {
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		return user.profile.post.what;
 	},
 	targetTags: function() {
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		return user.profile.post.targetTags;
 	},
 	hr: function() {
 		var curD = new Date();
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		var appointment = user.profile.post.appointment;
 
 		var difHr = appointment.getHours() - curD.getHours();
@@ -42,7 +42,7 @@ Template.postItem.helpers({
 	},
 	min: function() {
 		var curD = new Date();
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		var appointment = user.profile.post.appointment;
 
 		var difHr = appointment.getHours() - curD.getHours();
@@ -52,7 +52,7 @@ Template.postItem.helpers({
 		return difTime % 60;
 	},
 	where: function() {
-		var user = Meteor.users.findOne(this.userId);
+		var user = Meteor.users.findOne(this.posterId);
 		return user.profile.post.locationName;
 	}
 });

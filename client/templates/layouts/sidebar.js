@@ -1,6 +1,17 @@
 Template.sidebar.helpers({
 	username: function() {return Meteor.user().username;},
-	noUser: function() {return Meteor.user() === null || Meteor.user().emails[0].verified === false},
+	noUser: function() {return Meteor.user() === null || Meteor.user().emails[0].verified === false;},
+	havePost: function() {
+		if(Meteor.user())
+		{
+			if(Meteor.user().profile.havepost)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	},
 	genderTag: function() {
 		if(Meteor.user())
 		{
@@ -76,14 +87,9 @@ Template.sidebar.events({
 		$('#matches').hide();
 	},
 	'click #customize': function() {
-		if(Meteor.user().profile.post)
+		if(Session.get('targetTags'))
 		{
-			var targetTags;
-
-			if(Session.get('targetTags'))
-				targetTags = Session.get('targetTags');
-			else
-				targetTags = Meteor.user().profile.post.targetTags;
+			var targetTags = Session.get('targetTags');
 
 			var input = $('#search').val();
 			if(targetTags.indexOf(input) === -1)
@@ -93,17 +99,42 @@ Template.sidebar.events({
 			}
 			else
 			{
-				var targetTags = [];
+				var targetTags;
+				if(Meteor.user())
+				{
+					if(Meteor.user().profile.post.targetTags)
+						targetTags = Meteor.user().profile.post.targetTags;
+					else
+						targetTags = [];
+				}
+				else
+					targetTags = [];
+
+				var input = $('#search').val();
 				targetTags.push(input);
 				Session.set('targetTags', targetTags);
 			}
 		}
+		else
+		{
+			var targetTags;
+			if(Meteor.user())
+			{
+				if(Meteor.user().profile.post.targetTags)
+					targetTags = Meteor.user().profile.post.targetTags;
+				else
+					targetTags = [];
+			}
+			else
+				targetTags = [];
+	
+			var input = $('#search').val();
+			targetTags.push(input);
+			Session.set('targetTags', targetTags);
+		}
 	},
 	'click #postButton': function() {
-		if(Meteor.user().profile.havepost || Meteor.user().profile.havepost === true)
-		{
-		}
-		else
+		if(Meteor.user().profile.havepost === undefined || Meteor.user().profile.havepost === null)
 		{
 			$('.modal').modal('show');
 			$('#search').val('');
@@ -277,11 +308,12 @@ Template.sidebar.events({
 						if(Meteor.user().profile.post.locationName)
 						{
 							$('.modal').modal('hide');
-							Meteor.users.update(Meteor.user()._id, {$set: {'profile.havepost': true}});
+
 							Posts.insert({
-								userId: Meteor.user()._id,
+								posterId: Meteor.user()._id,
 							});
 
+							Meteor.users.update(Meteor.user()._id, {$set: {'profile.havepost': Posts.findOne({posterId: Meteor.user()._id})}});
 							Router.go('/');
 						}
 						else
