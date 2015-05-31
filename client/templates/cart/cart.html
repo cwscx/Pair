@@ -1,7 +1,26 @@
 <template name="cart">
-	<span class="glyphicon glyphicon-shopping-cart"></span>
+	<div class="glyphicon glyphicon-shopping-cart" id="cart"><span class="badge">1</span></div>
 	{{#if yourPost}}
-		<p> test</p>
+		<div class="panel panel-success" id="cartList" name="showList">
+			<div class="panel-heading">
+				Your Post
+			</div>
+			<div class="panel-body" style="text-align:left">
+				<h6>Aim: {{#each targetTags}}
+						<div class="label label-primary">{{this}}</div>
+					{{/each}}
+				</h6>
+				<h6>
+					What: <div class="label label-primary">{{what}}</div>
+				</h6>
+				<h6>
+					After <div class="label label-primary">{{hr}}</div> hr <div class="label label-primary">{{min}}</div> min
+				</h6>
+				<h6>
+					At <div class="label label-primary">{{where}}</div>
+				</h6>
+			</div>
+		</div>
 	{{else}}
 
 	{{/if}}
