@@ -1,6 +1,6 @@
 Template.topBar.helpers({
 	errorMessage: function() {return Session.get('errorMessage')},
-	noUser: function() {return Meteor.users.find().count() === 0 || Meteor.user().emails[0].verified === false},
+	noUser: function() {return Meteor.user() === null || Meteor.user().emails[0].verified === false},
 	username: function() {return ' Hello, ' + Meteor.user().username},
 })
 

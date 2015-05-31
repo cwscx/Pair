@@ -1,24 +1,39 @@
 Template.sidebar.helpers({
 	username: function() {return Meteor.user().username;},
-	noUser: function() {return Meteor.users.find().count() === 0 || Meteor.user().emails[0].verified === false},
+	noUser: function() {return Meteor.user() === null || Meteor.user().emails[0].verified === false},
 	genderTag: function() {
-		var profile = Meteor.user().profile;
-		return profile.gender;
+		if(Meteor.user())
+		{
+			var profile = Meteor.user().profile;
+			return profile.gender;
+		}
 	},
 	standingTag: function() {
-		var profile = Meteor.user().profile;
-		return profile.standing;
+		if(Meteor.user())
+		{
+			var profile = Meteor.user().profile;
+			return profile.standing;
+		}
 	},
 	majorsTags: function() {
-		var profile = Meteor.user().profile;
-		return profile.majors;
+		if(Meteor.user())
+		{
+			var profile = Meteor.user().profile;
+			return profile.majors;
+		}
 	},
 	interestsTags: function() {
-		var profile = Meteor.user().profile;
-		return profile.interests;
+		if(Meteor.user())
+		{
+			var profile = Meteor.user().profile;
+			return profile.interests;
+		}
 	},
 	firstTimeUser: function() {
-		return Meteor.user().profile.firstTimeUser === true;
+		if(Meteor.user())
+		{
+			return Meteor.user().profile.firstTimeUser === true;
+		}
 	},
 	targetTags: function() {
 		/* If the cuurent Session has value, get the current Session's tmp tags */
