@@ -100,7 +100,7 @@ Template.sidebar.events({
 			else
 			{
 				var targetTags;
-				if(Meteor.user())
+				if(Meteor.user().profile.post)
 				{
 					if(Meteor.user().profile.post.targetTags)
 						targetTags = Meteor.user().profile.post.targetTags;
@@ -118,7 +118,7 @@ Template.sidebar.events({
 		else
 		{
 			var targetTags;
-			if(Meteor.user())
+			if(Meteor.user().profile.post)
 			{
 				if(Meteor.user().profile.post.targetTags)
 					targetTags = Meteor.user().profile.post.targetTags;
