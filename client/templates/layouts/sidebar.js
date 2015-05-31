@@ -253,7 +253,7 @@ Template.sidebar.events({
 		$('#save').click();
 		if(Meteor.user().profile.post)
 		{
-			if(Meteor.user().profile.post.targetTags)
+			if(Meteor.user().profile.post.targetTags && Meteor.user().profile.post.targetTags.length > 0)
 			{
 				if(Meteor.user().profile.post.what && Meteor.user().profile.post.what !== '')
 				{
