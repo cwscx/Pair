@@ -85,61 +85,89 @@ Template.sidebar.events({
 		}
 	},
 	'click #postButton': function() {
-		$('#search').val('');
-
-		if(Meteor.user().profile.post)
+		if(Meteor.user().profile.havepost || Meteor.user().profile.havepost === true)
 		{
-			if(!Meteor.user().profile.post.what)	
-				$('#what').val('');
-			else
-				$('#what').val(Meteor.user().profile.post.what)
-
-			if(!Meteor.user().profile.post.appointment)
-			{
-				$('#mm').val('');
-				$('#hh').val('');
-			}
-			else
-			{
-				var curD = new Date();
-				var difHr = Meteor.user().profile.post.appointment.getHours() - curD.getHours();
-				var difMin = Meteor.user().profile.post.appointment.getMinutes() - curD.getMinutes();
-				var difTime = difHr * 60 + difMin;
-				difHr = Math.floor(difTime / 60);
-				difMin = difTime % 60;
-
-				if(difHr < 0 || (difHr <= 0 && difMin <= 0))
-				{
-					$('#mm').val('');
-					$('#hh').val('');
-					Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': null}});
-				}
-				else 
-				{
-					$('#mm').val(difMin);
-					$('#hh').val(difHr);
-				}
-			}
 		}
 		else
 		{
-			$('#what').val('');
-			$('#mm').val('');
-			$('#hh').val('');
+			$('.modal').modal('show');
+			$('#search').val('');
+
+			if(Meteor.user().profile.post)
+			{
+				if(!Meteor.user().profile.post.what)	
+					$('#what').val('');
+				else
+					$('#what').val(Meteor.user().profile.post.what)
+
+				if(!Meteor.user().profile.post.appointment)
+				{
+					$('#mm').val('');
+					$('#hh').val('');
+				}
+				else
+				{
+					/* Doing math to calculate the time difference properly */
+					var curD = new Date();
+					var difHr = Meteor.user().profile.post.appointment.getHours() - curD.getHours();
+					var difMin = Meteor.user().profile.post.appointment.getMinutes() - curD.getMinutes();
+					var difTime = difHr * 60 + difMin;
+					difHr = Math.floor(difTime / 60);
+					difMin = difTime % 60;
+
+					if(difHr < 0 || (difHr <= 0 && difMin <= 0))
+					{
+						$('#mm').val('');
+						$('#hh').val('');
+						Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': null}});
+					}
+					else 
+					{
+						$('#mm').val(difMin);
+						$('#hh').val(difHr);
+					}
+				}
+			}
+			else
+			{
+				$('#what').val('');
+				$('#mm').val('');
+				$('#hh').val('');
+			}
+
+			$('#matches').hide();
+			$('#customize').hide();
+
+			Session.set('postError', null);
+			if(Meteor.user().profile.post)
+			{
+				Session.set('targetTags', Meteor.user().profile.targetTags);
+				Session.set('what', $('#what').val());
+				Session.set('hh', $('#hh').val());
+				Session.set('mm', $('#mm').val());
+			}
+			else
+			{
+				Session.set('targetTags', null);
+				Session.set('what', null);
+				Session.set('hh', null);
+				Session.set('mm', null);
+			}
+
+			if(Meteor.user().profile.post)
+				Session.set('location', Meteor.user().profile.post.location);
+			else
+				Session.set('location', null)
+			
+			if(Meteor.user().profile.post)
+				Session.set('locationName', Meteor.user().profile.post.locationName);
+			else
+				Session.set('locationName', null);
+
+			setTimeout(function() {
+				google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
+			},200);
 		}
-
-		$('#matches').hide();
-		$('#customize').hide();
-
-		Session.set('postError', null);
-		Session.set('targetTags', null);
-		Session.set('what', null);
-		Session.set('hh', null);
-		Session.set('mm', null);
-
-		setTimeout(function() {
-			google.maps.event.trigger(GoogleMaps.maps.exampleMap.instance, 'resize');
-		},200);
 	},
 	'dblclick .doubleclick': function(event) {
 		var unwanted = $(event.target).html();
@@ -200,21 +228,56 @@ Template.sidebar.events({
 			var what = Session.get('what');
 			var hh = Session.get('hh');
 			var mm = Session.get('mm');
+			var location = Session.get('location');
+			var locationName = Session.get('locationName');
+			console.log(what);
 
 			var d = new Date();
 			d.setMinutes(Number(d.getMinutes()) + Number(mm));
 			d.setHours(Number(d.getHours()) + Number(hh));
 			
-			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+			if(targetTags !== undefined)
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
+			
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.what': what}});
 
-			if(hh === null && mm === null)
+			if((hh === null && mm === null) || (hh === '' && mm === ''))
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': null}});
 			else
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': d}});
+
+			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.location': location}});
+      		Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.locationName': locationName}});
 	},
 	'click #done': function() {
-
+		$('#save').click();
+		if(Meteor.user().profile.post)
+		{
+			if(Meteor.user().profile.post.targetTags)
+			{
+				if(Meteor.user().profile.post.what && Meteor.user().profile.post.what !== '')
+				{
+					if(Meteor.user().profile.post.appointment)
+					{
+						if(Meteor.user().profile.post.locationName)
+						{
+							$('.modal').modal('hide');
+							Meteor.users.update(Meteor.user()._id, {$set: {'profile.havepost': true}});
+						}
+						else
+							Session.set('postError', "Please finish where part of the post!");
+					}
+					else
+						Session.set('postError', "Please finish appointment time of the post!");
+				}
+				else
+					Session.set('postError', "Please finish what part of the post!");		
+			}
+			else
+				Session.set('postError', "Please finish aim targets of the post!");
+		}
+		else
+			Session.set('postError', "Please finish all parts of the post!");
 	}
 });
 

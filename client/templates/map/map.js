@@ -7,7 +7,13 @@ if (Meteor.isClient) {
 Template.map.events({
   'change #where':function() {
     var keyword = $('#where').val();
-    Session.set('keyword', keyword);
+    if(keyword === '')
+    {
+      Session.set('location',null);
+      Session.set('locationName', null);
+    }
+    else
+      Session.set('keyword', keyword);
   },
 });
 
@@ -15,16 +21,19 @@ Template.map.helpers({
     mapOptions: function() {
       // Make sure the maps API has loaded
       if (GoogleMaps.loaded()) {
+        if(Session.get('locationName'))
+          $('#where').val(Session.get('locationName'));
+
         var input = document.getElementById('where');
         google.maps.event.addDomListener(input, 'change', initialize);
         // Map initialization options
         return {
           center: new google.maps.LatLng(32.881, -117.238),
-          zoom: 15,
+          zoom: 14,
           zoomControl: true,
         };
       }
-    }
+    },
 });
 
 var markers = [];
@@ -67,7 +76,6 @@ function createMarker(place) {
       draggable:true,
       animation: google.maps.Animation.DROP,
       position: place.geometry.location,
-      id: document._id
     });
     marker.setMap(map);
     markers.push(marker);
@@ -78,8 +86,14 @@ function createMarker(place) {
     })
 
     google.maps.event.addListener(marker, 'dblclick', function() {
-      Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.location': marker.position}});
-      Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.locationName': place.name}});
+      Session.set('location', marker.position);
+      Session.set('locationName', place.name);
       $('#where').val(place.name);
+
+      for(var i = 0; i < markers.length; i++)
+      {
+        markers[i].setMap(null);
+      }
+      marker.setMap(map);
     })
 }
