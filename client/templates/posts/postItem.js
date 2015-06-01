@@ -57,7 +57,14 @@ Template.postItem.helpers({
 	where: function() {
 		var user = Meteor.users.findOne(this.posterId);
 		return user.profile.post.locationName;
-	}
+	},
+	paired: function() {
+		var partnerId = Meteor.user().profile.havepost.partnerId;
+		if(partnerId)
+			return true;
+		else
+			return false;
+	},
 });
 
 Template.postItem.events({

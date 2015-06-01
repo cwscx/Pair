@@ -17,7 +17,11 @@
 				</h5>
 			</div>
 			<div class="panel-footer">
-				<input id="pair" type="button" class="btn btn-primary" value="PAIR"/>
+				{{#if paired}}
+					<input id="pair" type="button" class="btn btn-primary" disabled value="PAIRED!"/>
+				{{else}}
+					<input id="pair" type="button" class="btn btn-primary" value="PAIR"/>
+				{{/if}}
 				<span style="color:#FF6633">{{pairError}}</span>
 			</div>
 		</div>

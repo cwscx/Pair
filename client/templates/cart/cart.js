@@ -49,7 +49,7 @@ Template.cart.helpers({
 	havePartner: function() {
 		if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
 		{
-			if(Meteor.user().profile.havepost.partnerId !== null)
+			if(Meteor.user().profile.havepost.partnerId)
 				return true;
 			else 
 				return false;
@@ -114,7 +114,7 @@ Template.cart.helpers({
 	    {
 			$("#cartList").slideUp('slow');
 			$("#cartList").attr('name', "hideList");
-			Meteor.call('deletePost', Meteor.user()._id, Meteor.user().profile.havepost._id);
+			Meteor.call('posterDeletePost', Meteor.user()._id, Meteor.user().profile.havepost._id, Meteor.user().profile.havepost.partnerId);
 		}
 
 		return Math.floor(difTime / 60);
