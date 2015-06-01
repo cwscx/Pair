@@ -5,6 +5,36 @@ Template.cart.helpers({
 		else
 			return false;
 	},
+	partnerPost: function() {
+		if(Meteor.user()._id === Meteor.user().profile.havepost.partnerId)
+			return true;
+		else
+			return false;
+	},
+	havePartner: function() {
+		if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
+		{
+			if(Meteor.user().profile.havepost.partnerId !== null)
+				return true;
+			else 
+				return false;
+		}
+		else
+			return false;
+	},
+	posterName: function() {
+		if(Meteor.user()._id === Meteor.user().profile.havepost.partnerId)
+		{
+			return Meteor.users.findOne(Meteor.user().profile.havepost.posterId).username;
+		}
+	},
+	partnerName: function() {
+		if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
+		{
+			if(Meteor.user().profile.havepost.partnerId)
+				return Meteor.users.findOne(Meteor.user().profile.havepost.partnerId).username;
+		}
+	},
 	userTags: function() {
 		var tags = [];
 		var user = Meteor.users.findOne(Meteor.user().profile.havepost.posterId);
@@ -39,6 +69,13 @@ Template.cart.helpers({
 		var difHr = appointment.getHours() - curD.getHours();
 	    var difMin = appointment.getMinutes() - curD.getMinutes();
 	    difTime = difHr * 60 + difMin;
+
+	    if(difTime <= 0)
+	    {
+			$("#cartList").slideUp('slow');
+			$("#cartList").attr('name', "hideList");
+			Meteor.call('deletePost', Meteor.user()._id, Meteor.user().profile.havepost._id);
+		}
 
 		return Math.floor(difTime / 60);
 	},
@@ -75,9 +112,13 @@ Template.cart.events({
 		}
 	},
 	'click #closeButton': function() {
-		$("#cartList").slideUp('slow');
 		$("#cartList").attr('name', "hideList");
-		Meteor.call('deletePost', Meteor.user()._id, Meteor.user().profile.havepost._id);
+		$("#cartList").slideUp('slow', function() {
+			if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
+				Meteor.call('posterDeletePost', Meteor.user().profile.havepost.posterId, Meteor.user().profile.havepost.partnerId, Meteor.user().profile.havepost._id);
+			else if(Meteor.user()._id === Meteor.user().profile.havepost.partnerId)
+				Meteor.call('partnerDeletePost', Meteor.user().profile.havepost.posterId, Meteor.user().profile.havepost.partnerId, Meteor.user().profile.havepost._id);
+		});
 	}
 });
 
@@ -87,4 +128,6 @@ Template.cart.rendered = function() {
 	});
 }
 
-Meteor.subscribe('posts');
+Meteor.subscribe('postUsers');
+
+

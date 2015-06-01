@@ -1,4 +1,7 @@
 Template.postItem.helpers({
+	pairError: function() {
+		return Session.get('pairError');
+	},
 	username: function() {
 		var user = Meteor.users.findOne(this.posterId);
 		return user.username;
@@ -55,6 +58,22 @@ Template.postItem.helpers({
 		var user = Meteor.users.findOne(this.posterId);
 		return user.profile.post.locationName;
 	}
+});
+
+Template.postItem.events({
+	'click #pair': function() {
+		Session.set('pairError', null);
+
+		if(Meteor.user())
+		{
+			if(Meteor.user()._id !== this.posterId)
+			{
+				Meteor.call('addPartner', this.posterId, Meteor.user()._id, this._id);
+			}
+			else
+				Session.set('pairError', "You cannot pair with yourself!");
+		}
+	},
 });
 
 Meteor.subscribe('postUsers');
