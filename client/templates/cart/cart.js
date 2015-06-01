@@ -115,9 +115,9 @@ Template.cart.helpers({
 			$("#cartList").slideUp('slow');
 			$("#cartList").attr('name', "hideList");
 
-			console.log(posterId);
-			console.log(partnerId);
-			console.log(postId);
+			var posterId = Meteor.user().profile.havepost.posterId;
+			var partnerId = Meteor.user().profile.havepost.partnerId;
+			var postId = Meteor.user().profile.havepost._id;
 			Meteor.call('posterDeletePost', posterId, partnerId, postId);
 		}
 
