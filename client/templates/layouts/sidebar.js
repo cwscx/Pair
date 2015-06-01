@@ -284,11 +284,9 @@ Template.sidebar.events({
 			var mm = Session.get('mm');
 			var location = Session.get('location');
 			var locationName = Session.get('locationName');
-			console.log(what);
 
 			var d = new Date();
-			d.setMinutes(Number(d.getMinutes()) + Number(mm));
-			d.setHours(Number(d.getHours()) + Number(hh));
+			var appointment = new Date(d.getTime() + (Number(hh) * 60 + Number(mm)) * 60000);
 			
 			if(targetTags !== undefined)
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.targetTags': targetTags}});
@@ -300,7 +298,7 @@ Template.sidebar.events({
 			if((hh === null && mm === null) || (hh === '' && mm === ''))
 				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': null}});
 			else
-				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': d}});
+				Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.appointment': appointment}});
 
 			Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.location': location}});
       		Meteor.users.update(Meteor.user()._id, {$set: {'profile.post.locationName': locationName}});
