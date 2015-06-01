@@ -37,7 +37,7 @@ Template.postItem.helpers({
 		var difHr = appointment.getHours() - curD.getHours();
 	    var difMin = appointment.getMinutes() - curD.getMinutes();
 	    difTime = difHr * 60 + difMin;
-
+	    
 		return Math.floor(difTime / 60);
 	},
 	min: function() {
