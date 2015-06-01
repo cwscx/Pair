@@ -142,6 +142,7 @@ Template.cart.helpers({
 
 Template.cart.events({
 	'click #cart': function() {
+		Session.keys={};
 		var name = document.getElementById("cartList").getAttribute('name');
 
 		if(name === 'showList')
@@ -156,6 +157,7 @@ Template.cart.events({
 		}
 	},
 	'click #closeButton': function() {
+		Session.keys={};
 		$("#cartList").attr('name', "hideList");
 		$("#cartList").slideUp('slow', function() {
 			if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
@@ -165,10 +167,12 @@ Template.cart.events({
 		});
 	},
 	'click .glyphicon-ok': function() {
+		Session.keys={};
 		var partnerId = String(this);
 		Meteor.call('addPartner', Meteor.user()._id, partnerId, Meteor.user().profile.havepost._id);
 	},
 	'click .glyphicon-remove': function() {
+		Session.keys={};
 		var partnerId = String(this);
 		var postId = Meteor.user().profile.havepost._id;
 		Meteor.call('removePossiblePartner', partnerId, postId);

@@ -1,7 +1,4 @@
 Template.postItem.helpers({
-	pairError: function() {
-		return Session.get('pairError');
-	},
 	username: function() {
 		var user = Meteor.users.findOne(this.posterId);
 		return user.username;
