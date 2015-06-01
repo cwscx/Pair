@@ -59,11 +59,15 @@ Template.postItem.helpers({
 		return user.profile.post.locationName;
 	},
 	paired: function() {
-		var partnerId = Meteor.user().profile.havepost.partnerId;
-		if(partnerId)
-			return true;
-		else
-			return false;
+		Session.set('pairError', null);
+		if(Meteor.user().profile.havepost)
+		{
+			var partnerId = Meteor.user().profile.havepost.partnerId;
+			if(partnerId)
+				return true;
+			else
+				return false;
+		}
 	},
 });
 
