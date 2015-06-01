@@ -1,6 +1,14 @@
 Template.sidebar.helpers({
 	username: function() {return Meteor.user().username;},
-	noUser: function() {return Meteor.user() === null || Meteor.user().emails[0].verified === false;},
+	noUser: function() {
+		if(Meteor.user() === null)
+			return true;
+		else
+		{
+			if(Meteor.user().emails[0].verified === false)
+				return true;
+		}
+	},
 	havePost: function() {
 		if(Meteor.user())
 		{

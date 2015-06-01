@@ -66,12 +66,10 @@ Template.postItem.events({
 
 		if(Meteor.user())
 		{
-			if(Meteor.user()._id !== this.posterId)
-			{
-				Meteor.call('addPartner', this.posterId, Meteor.user()._id, this._id);
-			}
-			else
+			if(Meteor.user()._id === this.posterId)
 				Session.set('pairError', "You cannot pair with yourself!");
+			else
+				Meteor.call("addPossiblePartner", Meteor.user()._id, this._id)
 		}
 	},
 });

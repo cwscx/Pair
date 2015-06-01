@@ -26,14 +26,27 @@
 				</h6>
 			</div>
 			<div class="panel-footer">
-				{{#if havePartner}}
-					{{partnerName}}
-				{{else}}
-					{{#if partnerPost}}
-						{{posterName}}
+				{{#if yourPost}}
+					{{#if havePartner}}
+						{{partnerName}}
+					{{else}}
+						{{#if havePossiblePartners}}
+							{{#each possiblePartners}}
+								<div class="row">
+									<div class="col-md-7">
+										{{possiblePartnerNames}}
+									</div>
+									<button class="btn btn-success btn-xs glyphicon glyphicon-ok"></button>
+									<button class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button>
+								</div>
+							{{/each}}
+						{{/if}}
 					{{/if}}
 				{{/if}}
 
+				{{#if partnerPost}}
+					{{posterName}}
+				{{/if}}
 			</div>
 		</div>
 </template>

@@ -1,15 +1,15 @@
 Template.topBar.helpers({
 	errorMessage: function() {return Session.get('errorMessage')},
 	noUser: function() {
-		if(Meteor.user() === null)
-			return true;
-		else
+		if(Meteor.user())
 		{
 			if(Meteor.user().emails[0].verified === false)
 				return true;
 			else
 				return false;
 		}
+		else
+			return true;
 	},
 	username: function() {return ' Hello, ' + Meteor.user().username},
 })

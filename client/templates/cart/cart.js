@@ -11,6 +11,41 @@ Template.cart.helpers({
 		else
 			return false;
 	},
+	havePossiblePartners: function() {
+		if(Meteor.user().profile.havepost)
+		{
+			if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
+			{
+				var post = Posts.findOne(Meteor.user().profile.havepost._id);
+				if(post)
+				{
+					if(post.partnerIds)
+						return true
+					else
+						return false;
+				}
+				else
+					return false;
+			}
+			else
+				return false;
+		}
+		else
+			return false;
+	},
+	possiblePartners: function() {
+		if(Meteor.user().profile.havepost)
+		{
+			if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
+			{
+				if(Posts.findOne(Meteor.user().profile.havepost._id).partnerIds)
+					return Posts.findOne(Meteor.user().profile.havepost._id).partnerIds;
+			}
+		}
+	},
+	possiblePartnerNames: function() {
+		return Meteor.users.findOne({_id: String(this)}).username;
+	},
 	havePartner: function() {
 		if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
 		{
@@ -31,8 +66,13 @@ Template.cart.helpers({
 	partnerName: function() {
 		if(Meteor.user()._id === Meteor.user().profile.havepost.posterId)
 		{
-			if(Meteor.user().profile.havepost.partnerId)
-				return Meteor.users.findOne(Meteor.user().profile.havepost.partnerId).username;
+			var partnerId = Meteor.user().profile.havepost.partnerId;
+			if(partnerId)
+			{
+				var partner = Meteor.users.findOne(partnerId);
+				if(partner)
+					return partner.username;
+			}
 		}
 	},
 	userTags: function() {
@@ -119,7 +159,16 @@ Template.cart.events({
 			else if(Meteor.user()._id === Meteor.user().profile.havepost.partnerId)
 				Meteor.call('partnerDeletePost', Meteor.user().profile.havepost.posterId, Meteor.user().profile.havepost.partnerId, Meteor.user().profile.havepost._id);
 		});
-	}
+	},
+	'click .glyphicon-ok': function() {
+		var partnerId = String(this);
+		Meteor.call('addPartner', Meteor.user()._id, partnerId, Meteor.user().profile.havepost._id);
+	},
+	'click .glyphicon-remove': function() {
+		var partnerId = String(this);
+		var postId = Meteor.user().profile.havepost._id;
+		Meteor.call('removePossiblePartner', partnerId, postId);
+	},
 });
 
 Template.cart.rendered = function() {
