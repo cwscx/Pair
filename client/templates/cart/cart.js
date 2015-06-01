@@ -114,7 +114,11 @@ Template.cart.helpers({
 	    {
 			$("#cartList").slideUp('slow');
 			$("#cartList").attr('name', "hideList");
-			Meteor.call('posterDeletePost', Meteor.user()._id, Meteor.user().profile.havepost._id, Meteor.user().profile.havepost.partnerId);
+
+			console.log(posterId);
+			console.log(partnerId);
+			console.log(postId);
+			Meteor.call('posterDeletePost', posterId, partnerId, postId);
 		}
 
 		return Math.floor(difTime / 60);
